@@ -41,11 +41,16 @@ class FDataBase:
             return False
         return True
 
-    def getData(self):
+    def getUser(self):
         try:
-            self.__cur.execute("SELECT * FROM login")
-            res = self.__cur.fetchall()
-            return res
+            return self.__cur.execute("SELECT user FROM login").fetchall()
+        except sq.Error as e:
+            print(str(e))
+            return False
+
+    def getPass(self):
+        try:
+            return self.__cur.execute("SELECT password FROM login").fetchall()
         except sq.Error as e:
             print(str(e))
             return False

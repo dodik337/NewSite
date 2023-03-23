@@ -28,10 +28,10 @@ def start_page():
 def login():
     db = get_db()
     database = FDataBase(db)
-    for data in database.getData():
+    for i in database.getData():
         if 'userlogged' in session:
             return redirect(url_for('profile', username=session['userlogged']))
-        elif request.method == 'POST' and request.form['username'] in data['user'] and request.form['psw'] in data['password']:
+        elif request.method == 'POST' and request.form['username'] == i['user'] and request.form['psw'] == i['password']:
             session['userlogged'] = request.form['username']
             return redirect(url_for('start_page', username=session['userlogged']))
         return render_template('login_2var.html', title="Авторизация")
